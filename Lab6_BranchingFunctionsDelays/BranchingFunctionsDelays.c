@@ -92,15 +92,13 @@ int main(void){
 
 	while(1){
 		// body goes here
-		Delay100ms(1333333);
-		
-		if ((GPIO_PORTF_DATA_R == 0x05 || GPIO_PORTF_DATA_R == 0x15)
-			& (In != GPIO_PORTF_DATA_R)) {
-			
+		Delay100ms(1);
+		In = GPIO_PORTF_DATA_R&0x10; // read pf4 into sw1
+		In = In >> 2;
+	
+		if (In == 0x00) {
 			// toggle blue LED
 			GPIO_PORTF_DATA_R ^= 0x04;
-			In = GPIO_PORTF_DATA_R;
-			
 		} else {
 			GPIO_PORTF_DATA_R = 0x04;
 		}
