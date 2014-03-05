@@ -65,14 +65,10 @@ int main(void){
   while(1){
     do{
       SW1 = GPIO_PORTF_DATA_R&0x10; // PF4 into SW1
-    } while(SW1 == 0x10);
-    do{
-		  SW2 = GPIO_PORTF_DATA_R&0x01; // PF0 into SW2
-		} while(SW2 == 0x01);
-		if (SW1 == 0X10 & SW2 == 0X01) {
-			FlashSOS();
-			delay(1); // delay between signals
-		}
+			SW2 = GPIO_PORTF_DATA_R&0x01; // PF0 into SW2
+    } while(SW1 == 0x10 || SW2 == 0x01);
+		FlashSOS();
+		delay(1); // delay between signals
   }
 }
 
@@ -135,7 +131,7 @@ void FlashSOS(void){
   GPIO_PORTF_DATA_R &= ~0x0A;delay(1);
   GPIO_PORTF_DATA_R |= 0x0A; delay(1);
   GPIO_PORTF_DATA_R &= ~0x0A;delay(1);
-  delay(10); // Delay for 5 secs in between flashes 
+  delay(8); // Delay for 5 secs in between flashes 
 }
 
 // Subroutine to delay in units of half seconds
@@ -147,7 +143,7 @@ void FlashSOS(void){
 void delay(unsigned long time){
   unsigned long i;
   while(time > 0){
-    i = 5333332;
+    i = 6666664;
     while(i > 0){
       i = i - 1;
     }
